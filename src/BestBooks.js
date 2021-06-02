@@ -60,7 +60,7 @@ class BestBooks extends React.Component {
         })
     }
     componentDidMount = async () => {
-        let result = await axios.get(`http://localhost:3001/books?email=${this.props.auth0.user.email}`);
+        let result = await axios.get(`${process.env.REACT_APP_ROUTE}/books?email=${this.props.auth0.user.email}`);
         this.setState({
             booksInfo: result.data,
             rend: true,
@@ -77,7 +77,7 @@ class BestBooks extends React.Component {
             imageUrl: this.state.img_url,
             email: this.props.auth0.user.email,
         }
-        let result = await axios.post('http://localhost:3001/addBooks', books);
+        let result = await axios.post(`${process.env.REACT_APP_ROUTE}/addBooks`, books);
         this.setState({
             booksInfo: result.data,
             showModal: false,
@@ -87,7 +87,7 @@ class BestBooks extends React.Component {
         const email = {
             email: this.props.auth0.user.email
         }
-        let newBooks = await axios.delete(`http://localhost:3001/deleteBook/${index}`, { params: email })
+        let newBooks = await axios.delete(`${process.env.REACT_APP_ROUTE}/deleteBook/${index}`, { params: email })
 
         this.setState({
             booksInfo: newBooks.data
@@ -111,7 +111,7 @@ class BestBooks extends React.Component {
             imageUrl: this.state.img_url,
             email: this.props.auth0.user.email,
         }
-        let newBooks = await axios.put(`http://localhost:3001/updateBook/${this.state.index}`,books )
+        let newBooks = await axios.put(`${process.env.REACT_APP_ROUTE}/updateBook/${this.state.index}`,books )
         this.setState({
             booksInfo:newBooks.data,
             showUpdateForm: false,
